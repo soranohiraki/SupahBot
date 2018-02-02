@@ -7,36 +7,24 @@ var WordService = require('./components/wordservice.js');
 var WeatherService = require('./components/weatherservice.js');
 
 var commands = {
-  '!video': {
+  '!동영상': {
     execute: getVideo,
-    description: 'get a youtube video by search word'
+    description: '당신이 원하는 영상을 봇이 찾아줍니다!'
   },
-  '!weather': {
+  '!계절': {
     execute: getWeather,
-    description: 'get current weather for the given city, defaults to Stockholm'
+    description: '아직 수정중인 명령어입니다'
   },
-  '!roll': {
-    execute: roll,
-    description: 'roll from 1-100'
-  },
-  '!help': {
+  '!도움말': {
     execute: showHelp
   },
-  '!words': {
-    execute: countWordsByUser,
-    description: 'get the most popular words for user of the given username, defaults to your username'
-  },
-  '!queue': {
+  '!노래신청': {
     execute: doQueue,
-    description: 'queue your song'
+    description: '노래를 신청합니다.'
   },
-  '!voteskip': {
+  '!스킵': {
     execute: voteSkip,
-    description: 'vote to skip the current song'
-  },
-  '!song': {
-    execute: showSong,
-    description: 'get the current song'
+    description: '스킵에 대한 투표를 합니다.'
   }
 };
 
@@ -58,11 +46,11 @@ function voteSkip(args, message) {
 
 function doQueue(args, message) {
   if (args.length <= 0) {
-    return message.reply(Helper.wrap('Type of music need to be specified.'));
+    return message.reply(Helper.wrap('정확히 노래를 적어주세요.'));
   }
 
   if (Queue.isFull()) {
-    return message.reply(Helper.wrap('Queue is full.'));
+    return message.reply(Helper.wrap('노래가 너무많이 신청되었습니다!'));
   }
 
   if (args.startsWith('http')) {
