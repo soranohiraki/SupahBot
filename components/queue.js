@@ -22,7 +22,7 @@ module.exports = Queue = function() {
 Queue.prototype.add = function(track, message) {
   this.queue.push(track);
 
-  message.reply(Helper.wrap('Added ' + track.title + ' to the queue. (number ' + (this.queue.indexOf(track) + 1) + ')'));
+  message.reply(Helper.wrap(` ' + track.title + '를 추가하였습니다. (number ' + (this.queue.indexOf(track) + 1) + ')'));
 
   if (this.queue.length == 1) {
     this.play(message);
@@ -39,12 +39,12 @@ Queue.prototype.play = function(message) {
 
   if (!channel) {
     vm.queue = [];
-    return message.reply(Helper.wrap('You are not in a voice channel.'));
+    return message.reply(Helper.wrap('보이스채널에 들어가주세요.'));
   }
 
   var toPlay = vm.queue[0];
   if (!toPlay) {
-    return message.reply(Helper.wrap('No songs in queue.'));
+    return message.reply(Helper.wrap('신청된 노래가 없습니다.'));
   }
 
   channel.join().then(connection => {
@@ -64,7 +64,7 @@ Queue.prototype.play = function(message) {
     });
 
     vm.skipVotes = [];
-    message.channel.sendMessage(Helper.wrap('Now playing: ' + toPlay.title));
+    message.channel.sendMessage(Helper.wrap('현곡은: ' + toPlay.title));
   }).catch(console.error);
 }
 
@@ -72,9 +72,9 @@ Queue.prototype.showSong = function(message) {
   var song = this.queue[0];
 
   if (song) {
-    return message.reply(Helper.wrap('Now playing: ' + song.title + '\n' + song.url));
+    return message.reply(Helper.wrap('현곡: ' + song.title + '\n' + song.url));
   } else {
-    return message.reply(Helper.wrap('No song is currently playing.'));
+    return message.reply(Helper.wrap('노래가 나오고있지 않습니다.'));
   }
 }
 
@@ -83,7 +83,7 @@ Queue.prototype.voteSkip = function(message) {
   var channel = getAuthorVoiceChannel(message);
 
   if (!vm.currentDispatcher) {
-    return message.reply(Helper.wrap('No song is currently playing.'));
+    return message.reply(Helper.wrap('노래가 나오고있지 않습니다.'));
   }
 
   if (vm.admins.includes(message.member.user.id)) {
@@ -92,11 +92,11 @@ Queue.prototype.voteSkip = function(message) {
   }
 
   if (!channel) {
-    return message.reply(Helper.wrap("You are not allowed to voteskip since you're not in the channel."));
+    return message.reply(Helper.wrap("음성채널에 없으므로 노래스킵이 불가능합니다"));
   }
 
   if (vm.skipVotes.indexOf(message.author.id) > -1) {
-    return message.reply(Helper.wrap('You have already voted to skip this song.'));
+    return message.reply(Helper.wrap('이미 이 노래를 건너 뛰기로 투표했습니다.'));
   }
 
   vm.skipVotes.push(message.author.id);
@@ -107,7 +107,7 @@ Queue.prototype.voteSkip = function(message) {
     this.currentDispatcher.end();
   } else {
     var votesNeeded = getAmountOfVotesNeeded(totalMembers, vm.skipVotes.length, vm.skipmajority);
-    return message.reply(Helper.wrap('You need ' + votesNeeded + ' more vote(s) to skip this song.'));
+    return message.reply(Helper.wrap('이 노래를 건너 뛰려면 '+ votesNeeded +'이상의 투표가 필요합니다.'));
   }
 }
 
@@ -117,7 +117,7 @@ Queue.prototype.remove = function(message) {
   if (this.queue.length > 0) {
     this.play(message);
   } else {
-    message.channel.sendMessage(Helper.wrap('No more songs in queue.'));
+    message.channel.sendMessage(Helper.wrap('대기열에 더 이상 노래가 없습니다.'));
   }
 }
 
