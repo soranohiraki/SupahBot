@@ -22,7 +22,7 @@ module.exports = Queue = function() {
 Queue.prototype.add = function(track, message) {
   this.queue.push(track);
 
-  message.reply(Helper.wrap(` ' + track.title + '를 추가하였습니다. (number ' + (this.queue.indexOf(track) + 1) + ')'));
+  message.reply(Helper.wrap(track.title + '를 추가하였습니다. (number ' + (this.queue.indexOf(track) + 1) + ')'));
 
   if (this.queue.length == 1) {
     this.play(message);
