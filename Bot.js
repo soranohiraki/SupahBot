@@ -124,7 +124,7 @@ function execute(content, message) {
 
 function executeCommand(command, message, args) {
   if (!Helper.commandIsAvailable(command)) {
-    return message.reply(Helper.wrap('Command is not available.'));
+    return message.reply(Helper.wrap('명령을 사용할 수 없습니다.'));
   }
 
   command.execute(getCommandArguments(args), message);
