@@ -7,22 +7,22 @@ var WordService = require('./components/wordservice.js');
 var WeatherService = require('./components/weatherservice.js');
 
 var commands = {
-  '!동영상': {
+  '#동영상': {
     execute: getVideo,
     description: '당신이 원하는 영상을 봇이 찾아줍니다!'
   },
-  '!계절': {
+  '#계절': {
     execute: getWeather,
     description: '아직 수정중인 명령어입니다'
   },
-  '!도움말': {
+  '#도움말': {
     execute: showHelp
   },
-  '!노래신청': {
+  '#노래신청': {
     execute: doQueue,
     description: '노래를 신청합니다.'
   },
-  '!스킵': {
+  '#스킵': {
     execute: voteSkip,
     description: '스킵에 대한 투표를 합니다.'
   }
