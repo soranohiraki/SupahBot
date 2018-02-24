@@ -6,9 +6,8 @@ var TrackHelper = require('./components/trackhelper.js');
 var WordService = require('./components/wordservice.js');
 var WeatherService = require('./components/weatherservice.js');
 
-
-client.on('ready', () => {
-  client.user.setGame(`#노래신청 (링크)`);
+Bot.on('ready', () => {
+  Bot.user.setGame(`#노래신청 (링크)`);
 });
 
 
